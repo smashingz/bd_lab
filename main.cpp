@@ -25,6 +25,11 @@ int main() {
                    std::cout << "Empty result set." << std::endl;
                    return 0;
 		}
+		for(int i = 0; i < res.columns(); i++) {
+			std::cout << res.column_name(i) << "\t";
+		}
+		std::cout << std::endl;
+		//TODO Сделать нормальный вывод таблицы
 		for (auto i: res) {
 			for (auto j: i) {
 				std::cout << j << "\t";
