@@ -1,29 +1,16 @@
-#include <pqxx/connection>
 #include <pqxx/transaction>
 #include <pqxx/result>
 #include <iostream>
 #include <iomanip>
-#include <string>
-#include <codecvt>
 
 void print_query_res(pqxx::result r);
 
 int main() {
-	const std::string DB_NAME = "hostels";
-	const std::string HOST = "localhost";
-	const std::string QUERY = "SELECT * FROM hostel";
-	std::string login, password;
 	std::cout << "Логин: ";
 	std::cin >> login;
 	std::cout << "Пароль: ";
 	std::cin >> password;
-	std::ostringstream conn_policy;
-	conn_policy << "host=" << HOST 
-		<< " user=" << login
-		<< " password=" << password
-		<< " dbname=" << DB_NAME;
 	try {
-		pqxx::connection conn(conn_policy.str());
 		pqxx::work act(conn, "SampleSelect");	
 		pqxx::result res = act.exec(QUERY);
 		if (!res.size()) {
@@ -51,7 +38,6 @@ void print_query_res(pqxx::result r) {
 				n++;
 			}
 			n = 0;
-			//std::cout << std::endl;
 		}
 		for(int i = 0; i < r.columns(); i++) {
 			std::cout << "|" << std::setw(widths[i]) << std::left << r.column_name(i) << " ";
