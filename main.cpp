@@ -1,5 +1,6 @@
 #include <pqxx/connection>
 #include <pqxx/transaction>
+#include <pqxx/result>
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -44,14 +45,8 @@ void print_query_res(pqxx::result r) {
 		}
 		for (auto i: r) {
 			for (auto j: i) {
-			//	std::cout << "[" << j << "] ";
 				if(pqxx::to_string(j).length() > widths[n]) {
-					//std::cout << pqxx::to_string(j) << "[" << pqxx::to_string(j).length() << "]" << std::endl;
-					//widths[n] = std::wstring(pqxx::to_string(j)).length();
-					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-					std::string narrow = converter.to_bytes(pqxx::to_string(j));
-					std::wstring wide = converter.from_bytes(narrow); // TODO Сделать нормальный подсчёт символов в строке
-					width[n] = wide.length();
+					widths[n] = std::string(pqxx::to_string(j)).length();
 				}
 				n++;
 			}
