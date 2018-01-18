@@ -2,6 +2,7 @@
 #include <pqxx/result>
 #include <iostream>
 #include <iomanip>
+#include "connection.hpp"
 
 void print_query_res(pqxx::result r);
 
@@ -11,6 +12,7 @@ int main() {
 	std::cout << "Пароль: ";
 	std::cin >> password;
 	try {
+		Connection conn("localhost", login, password, "hostels");
 		pqxx::work act(conn, "SampleSelect");	
 		pqxx::result res = act.exec(QUERY);
 		if (!res.size()) {

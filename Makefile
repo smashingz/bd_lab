@@ -1,14 +1,15 @@
 .PHONY: all clean
 
-SRC = lab1
+SRC = main.cpp connection.cpp
+BIN = lab1
 LIBS = libpqxx gtkmm-3.0
 INCLUDE = `pkg-config $(LIBS) --cflags --libs`
 
-all: $(SRC).o
-	g++ -o $(SRC).out $(SRC).o $(INCLUDE)
+all: $(BIN).o
+	g++ -o $(BIN).out $(BIN).o $(INCLUDE)
 
-$(SRC).o: main.cpp
-	g++ -g -c -o $(SRC).o main.cpp $(INCLUDE)
+$(BIN).o: main.cpp 
+	g++ -g -c -o $(BIN).o $(SRC) $(INCLUDE)
 
 clean:
 	rm -f *.o *.out
