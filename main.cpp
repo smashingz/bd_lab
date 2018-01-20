@@ -7,19 +7,20 @@
 void print_query_res(pqxx::result r);
 
 int main() {
+	std::string login, password;
 	std::cout << "Логин: ";
 	std::cin >> login;
 	std::cout << "Пароль: ";
 	std::cin >> password;
 	try {
 		Connection conn("localhost", login, password, "hostels");
-		pqxx::work act(conn, "SampleSelect");	
+		/*pqxx::work act(conn, "SampleSelect");	
 		pqxx::result res = act.exec(QUERY);
 		if (!res.size()) {
                    std::cout << "Empty result set." << std::endl;
                    return 0;
 		}
-	print_query_res(res);
+	print_query_res(res);*/
 	} catch(pqxx::pqxx_exception &e) {
 		std::cerr << e.base().what() << std::endl;
 	}

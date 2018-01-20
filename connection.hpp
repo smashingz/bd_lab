@@ -11,5 +11,5 @@ class Connection {
 	public:	
 		Connection(std::string host, std::string login, std::string password, std::string db_name);
 		~Connection();
-		&Connection connect();
+		void connect();
 };
